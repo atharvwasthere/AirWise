@@ -155,6 +155,35 @@ const Logic = () => {
         };
 
     }
+
+    const fetchNearbyAQI = async(waqiBounds) => {
+
+        if(!waqiBounds) {
+            toast.error('Invalid Bounding Box values',{
+                description: 'Please provide valid bounding box values'
+            })
+        }
+            setIsloading(true);
+        try{
+            const response = await fetch(
+                `https://api.waqi.info/map/bounds/?token=${WAQI_API_KEY}&latlng=${waqiBounds}`
+            );
+
+            const data = await response.json();
+            console.log(data);
+
+        } catch (error) {
+            toast.error('Error fetching nearby AQI data', {
+                description: error.message
+            });
+        } finally {
+            setIsloading(false);
+        }
+
+        
+
+    } 
+
     const getCurrentLocation = () => {
         if (!navigator.geolocation) {
             toast.error('Geolocation not supported', {
@@ -178,11 +207,12 @@ const Logic = () => {
 
                 // defining the center & radius for the bounding box
                 const center  = {latitude, longitude};
-                const radius = 500; // 500 km
+                const radius = 500; // km
                 const bbox = getBoundingBox(center.latitude, center.longitude, radius);
 
                 const waqiBounds = `${bbox.southWest[0]},${bbox.southWest[1]},${bbox.northEast[0]},${bbox.northEast[1]}`;
-                console.log(waqiBounds);
+                //console.log(waqiBounds);
+                fetchNearbyAQI(waqiBounds);
 
                 toast.success('Location Retrieved', {
                     description: `Coordinates: ${latitude}, ${longitude}`

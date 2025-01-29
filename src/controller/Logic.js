@@ -156,6 +156,8 @@ const Logic = () => {
 
     }
 
+
+
     const fetchNearbyAQI = async(waqiBounds) => {
 
         if(!waqiBounds) {
@@ -169,8 +171,25 @@ const Logic = () => {
                 `https://api.waqi.info/map/bounds/?token=${WAQI_API_KEY}&latlng=${waqiBounds}`
             );
 
+            if(!response.ok) {
+                throw new Error ('Failed to fetch nearby AQI data');
+            }
+            
             const data = await response.json();
-            console.log(data);
+            // console.log(data);
+            
+            const sortedData = data.data.sort((a,b) => Number(a.aqi) - Number(b.aqi));
+            const leastTen = sortedData.slice(0,10);
+
+            console.log(leastTen);
+            return leastTen;
+
+            /* 
+            1. response.status !== 'ok' ?
+            2. data.lat && data.lon 
+            3. data.data[0].aqi (sort by aqi)
+            4. data.data[0].station.name
+            */
 
         } catch (error) {
             toast.error('Error fetching nearby AQI data', {
@@ -253,7 +272,7 @@ const Logic = () => {
         );
 
     }
-    return { location, AQIdata, isloading, getCurrentLocation }
+    return { location, AQIdata, isloading, getCurrentLocation , fetchNearbyAQI };
 }
 
 export default Logic;

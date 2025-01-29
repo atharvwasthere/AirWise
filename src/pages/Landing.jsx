@@ -1,3 +1,4 @@
+import { NavLink} from "react-router";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Switch } from "@/components/ui/switch"
 import { Button } from "@/components/ui/button"
@@ -19,7 +20,7 @@ const Landing = () => {
     //     no2: 25.6,
     // }]
 
-    const { location, AQIdata, isLoading, getCurrentLocation } = Logic();
+    const { location, AQIdata, isLoading, getCurrentLocation ,fetchNearbyAQI } = Logic();
 
     const getAQIColor = () => {
         const currentAQI = AQIdata.aqi;
@@ -150,7 +151,7 @@ const Landing = () => {
         <div className="min-h-screen bg-background text-foreground  space-y-4 max-w-2xl mx-auto">
             <Toaster richColors />
             <div className="flex justify-between items-center">
-                <h1 className="text-4xl font-semibold text-foreground">AQI Check</h1>
+                <h1 className="text-4xl font-semibold text-foreground">AirWise</h1>
                 <div className="flex items-center space-x-2">
                     <Sun className="h-4 w-4" />
                     <Switch
@@ -199,13 +200,16 @@ const Landing = () => {
                             </p>
                         </div>
                         <div className="flex gap-2 items-center justify-end mt-2">
+                            <NavLink to="/trip" >
                             <Button
                                 variant="default"
                                 className="text-xs h-6 w-24 bg-green-400 hover:bg-green-500 text-white rounded-md px-3 py-1"
+                                onClick ={fetchNearbyAQI}
                             >
                                 <TicketsPlaneIcon className="h-4 w-4 mr-1" />
                                 Take a Trip
                             </Button>
+                            </NavLink>
                             <Button
                                 variant="destructive"
                                 onClick={handleClose}

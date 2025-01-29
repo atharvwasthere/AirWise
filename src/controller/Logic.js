@@ -206,11 +206,11 @@ const Logic = () => {
                     station.lon
                 ).toFixed(2)
             }))
-            .sort((a, b) => a.aqi - b.aqi || a.distance - b.distance);
+            .sort((a, b) => a.aqi - b.aqi && a.distance - b.distance);
 
-        const topTen = stationsWithDistance.slice(0, 10);
-             console.log(topTen);
-            return topTen;
+        const topFive = stationsWithDistance.slice(0, 5);
+             console.log(topFive);
+            return topFive;
 
             /* 
             1. response.status !== 'ok' ?

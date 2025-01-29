@@ -156,9 +156,26 @@ const Logic = () => {
 
     }
 
+    function calculateDistance(lat1, lon1, lat2, lon2) {
+        // Earth's radius in kilometers
+        const R = 6371; 
+    
+        // Convert degrees to radians
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLon = (lon2 - lon1) * Math.PI / 180;
+        
+        const a = 
+            Math.sin(dLat/2) * Math.sin(dLat/2) +
+            Math.cos(lat1 * Math.PI / 180) * 
+            Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLon/2) * Math.sin(dLon/2);
+            
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        
+        return R * c; // Distance in kilometers
+    }
 
-
-    const fetchNearbyAQI = async(waqiBounds) => {
+    const fetchNearbyAQI = async(waqiBounds, location) => {
 
         if(!waqiBounds) {
             toast.error('Invalid Bounding Box values',{
@@ -178,11 +195,22 @@ const Logic = () => {
             const data = await response.json();
             // console.log(data);
             
-            const sortedData = data.data.sort((a,b) => Number(a.aqi) - Number(b.aqi));
-            const leastTen = sortedData.slice(0,10);
+            const stationsWithDistance = data.data
+            .filter(station => station.aqi && station.lat && station.lon)
+            .map(station => ({
+                ...station,
+                distance: calculateDistance(
+                    location.latitude,
+                    location.longitude,
+                    station.lat,
+                    station.lon
+                ).toFixed(2)
+            }))
+            .sort((a, b) => a.aqi - b.aqi || a.distance - b.distance);
 
-            console.log(leastTen);
-            return leastTen;
+        const topTen = stationsWithDistance.slice(0, 10);
+             console.log(topTen);
+            return topTen;
 
             /* 
             1. response.status !== 'ok' ?
@@ -231,7 +259,7 @@ const Logic = () => {
 
                 const waqiBounds = `${bbox.southWest[0]},${bbox.southWest[1]},${bbox.northEast[0]},${bbox.northEast[1]}`;
                 //console.log(waqiBounds);
-                fetchNearbyAQI(waqiBounds);
+                fetchNearbyAQI(waqiBounds ,location);
 
                 toast.success('Location Retrieved', {
                     description: `Coordinates: ${latitude}, ${longitude}`

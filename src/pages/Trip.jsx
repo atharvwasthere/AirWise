@@ -35,7 +35,6 @@ const Trip = () => {
                     <Moon className="h-4 w-4" />
                 </div>
             </div>
-            <h1> Trip </h1>
 
             <Card>
 

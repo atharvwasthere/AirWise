@@ -98,7 +98,7 @@ const Logic = () => {
                 ];
 
                 const pm25AQI = calculate(pm25, pm25Thresholds);
-                const pm10AQI = calculate(pm10, pm10Thresholds);   
+                const pm10AQI = calculate(pm10, pm10Thresholds);
 
                 return Math.max(pm25AQI, pm10AQI);
 
@@ -136,6 +136,25 @@ const Logic = () => {
 
     };
 
+    const getBoundingBox = (lat, lng, radiusKm) => {
+        // Latitude calculation (1° = 111km)
+        const deltaLat = radiusKm / 111;
+        const latMin = lat - deltaLat;
+        const latMax = lat + deltaLat;
+
+        // Longitude calculation (adjusted for latitude)
+        const latRad = lat * Math.PI / 180;
+        const deltaLng = radiusKm / (111 * Math.cos(latRad));
+        const lngMin = lng - deltaLng;
+        const lngMax = lng + deltaLng;
+
+        // Handle polar/date-line edge cases
+        return {
+            southWest: [Math.max(-90, latMin), (lngMin + 540) % 360 - 180], // Normalize longitude
+            northEast: [Math.min(90, latMax), (lngMax + 540) % 360 - 180]
+        };
+
+    }
     const getCurrentLocation = () => {
         if (!navigator.geolocation) {
             toast.error('Geolocation not supported', {
@@ -156,6 +175,14 @@ const Logic = () => {
                 });
                 console.log(latitude, longitude);
                 fetchAQIdata(latitude, longitude);
+
+                // defining the center & radius for the bounding box
+                const center  = {latitude, longitude};
+                const radius = 500; // 500 km
+                const bbox = getBoundingBox(center.latitude, center.longitude, radius);
+
+                const waqiBounds = `${bbox.southWest[0]},${bbox.southWest[1]},${bbox.northEast[0]},${bbox.northEast[1]}`;
+                console.log(waqiBounds);
 
                 toast.success('Location Retrieved', {
                     description: `Coordinates: ${latitude}, ${longitude}`
@@ -200,4 +227,3 @@ const Logic = () => {
 }
 
 export default Logic;
-

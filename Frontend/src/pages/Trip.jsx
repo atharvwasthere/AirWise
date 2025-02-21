@@ -8,7 +8,7 @@ import Logic from "@/controller/Logic"
 
 const Trip = () => {
     const [darkMode, setDarkMode] = useState(false);
-    const {fetchNearbyAQI} = Logic();
+    const { fetchNearbyAQI } = Logic();
     useEffect(() => {
         if (darkMode) {
             document.documentElement.classList.add('dark')
@@ -18,7 +18,7 @@ const Trip = () => {
     }, [darkMode])
 
     return (
-        <div className="min-h-screen bg-background text-foreground  space-y-4 max-w-2xl mx-auto">
+        <div className="bg-background text-foreground  space-y-4 max-w-2xl mx-auto">
             <div className=" flex justify-between items-center">
                 <div className="border-2 border-red-500">
 
@@ -35,10 +35,18 @@ const Trip = () => {
                     <Moon className="h-4 w-4" />
                 </div>
             </div>
+            <section>
 
-            <Card>
+                <Card>
+                    <CardTitle>
+                        <h1>{fetchNearbyAQI}</h1>
+                    </CardTitle>
+                    <CardContent>
 
-            </Card>
+                    </CardContent>
+
+                </Card>
+            </section>
         </div>
 
     )

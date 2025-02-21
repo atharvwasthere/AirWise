@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router";
 import { ThemeProvider } from './components/ThemeProvider'
 import Landing from './pages/Landing'
 import Trip from './pages/Trip'
+import TripPage from './pages/Trip-page';
 
 function App() {
 
@@ -19,7 +20,7 @@ function App() {
             } />
             <Route path='/trip' element={
               <div className='min-h-screen w-full flex  overflow-x-hidden'>
-                <Trip/>
+                <TripPage/>
               </div>
             }
             />

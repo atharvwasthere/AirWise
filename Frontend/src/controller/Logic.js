@@ -206,7 +206,7 @@ const Logic = () => {
                     station.lon
                 ).toFixed(2)
             }))
-            .sort((a, b) => a.aqi - b.aqi && a.distance - b.distance);
+            .sort((a, b) => Number(a.aqi) - Number(b.aqi) || Number(a.distance) - Number(b.distance));
 
         const topFive = stationsWithDistance.slice(0, 5);
              console.log(topFive);

@@ -3,11 +3,16 @@ const Schema = mongoose.Schema;
 
 const placeSchema = new Schema ({
     _id :ObjectId,
-    name :String,
+    name : {type :String , required: true},
+    state : {type:String , required: true},
     description : String,
     locatin : {
-        type : {type : String , default : 'Point'}, // GeoJSON type
-        coordinates : [Number] // [longitude, latitude] format 
+        type : {type : String , default : 'Point' , required: true}, // GeoJSON type
+        coordinates: {
+            type: [Number],
+            required: true
+          },        
+        state : [String] // State for checking 
     },
     aqiHistory : [
         {
@@ -19,6 +24,15 @@ const placeSchema = new Schema ({
             no2 : Number,
         }
     ],
+    weather_patterns: {
+        summer: String,
+        monsoon: String,
+        winter: String
+      },
+      bestTimeToVisit: {
+        from: String,
+        to: String
+      },
     avgAqi : Number,
     tags : [String],
     createdAt : {type : Date, default : Date.now},
@@ -27,6 +41,7 @@ const placeSchema = new Schema ({
 
 // Geosptial index
 placeSchema.index({location : '2dsphere'});
+placeSchema.index({ state: 1 }); // For state-based queries
 
 const Place = mongoose.model('Place', placeSchema);
 

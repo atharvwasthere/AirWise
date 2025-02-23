@@ -6,7 +6,7 @@ const placeSchema = new Schema ({
     name : {type :String , required: true},
     state : {type:String , required: true},
     description : String,
-    locatin : {
+    location : {
         type : {type : String , default : 'Point' , required: true}, // GeoJSON type
         coordinates: {
             type: [Number],

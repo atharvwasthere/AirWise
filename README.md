@@ -20,7 +20,7 @@ Travel Assistance: Includes transport options, accommodation suggestions, and po
 - Frontend: React, TailwindCSS
 - Backend: Node.js, Express, MongoDB ,Redis
 - APIs: WAQI API, Google Maps API
-- Deployment: Docker, AWS/GCP
+- Deployment: Docker, AWS
 
 
 ## Installation 🚀
@@ -84,10 +84,3 @@ Receive health and activity guidance based on AQI levels.
 
 ## License 📜
 This project is licensed under the MIT License. See the [LICENSE](https://chatgpt.com/c/LICENSE) file for more details.
-
-## Contributing 🤝
-Contributions are welcome! Feel free to fork the repo and submit pull requests.
-
-## Contact 📬
-For any questions or suggestions, reach out via GitHub Issues or email at [your-email@example.com](mailto:your-email@example.com).
-Happy Travels! ✈️

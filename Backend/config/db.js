@@ -4,7 +4,11 @@ require('dotenv').config();
 
 const connectDB = async () => {
     try{
-        await mongoose.connect(process.env.MONGODB_URI);
+        await mongoose.connect(process.env.MONGODB_URI,{
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            maxPoolSize: 10,
+        });
         console.log(process.env.MONGODB_URI);
         console.log('MongoDB connected successfully');
     } catch (error){

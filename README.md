@@ -31,6 +31,10 @@ MongoDB (v5 or higher)
 WAQI API Token
 Redis (v6 or higher)
 
+## User WorkFlow  
+![user_workflow](./user_workflow.png)  
+
+
 ### Steps
 
 

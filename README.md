@@ -32,9 +32,8 @@ WAQI API Token
 Redis (v6 or higher)
 
 ## User WorkFlow  
-![user_workflow](./user_workflow.png)  
-<img src="./user_workflow.png" alt="User Workflow" width="600" />
 
+![Screenshot 2025-03-22 192850](https://github.com/user-attachments/assets/c2e66fc5-d59d-4f39-bc1a-da73146bd7cf)
 
 
 ### Steps

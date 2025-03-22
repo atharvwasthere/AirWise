@@ -33,6 +33,8 @@ Redis (v6 or higher)
 
 ## User WorkFlow  
 ![user_workflow](./user_workflow.png)  
+<img src="./user_workflow.png" alt="User Workflow" width="600" />
+
 
 
 ### Steps

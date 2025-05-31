@@ -256,7 +256,7 @@ const Logic = () => {
                 const center  = {latitude, longitude};
                 const radius = 500; // km
                 const bbox = getBoundingBox(center.latitude, center.longitude, radius);
-
+                
                 const waqiBounds = `${bbox.southWest[0]},${bbox.southWest[1]},${bbox.northEast[0]},${bbox.northEast[1]}`;
                 //console.log(waqiBounds);
                 fetchNearbyAQI(waqiBounds ,location);

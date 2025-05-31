@@ -1,8 +1,7 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const placeSchema = new Schema ({
-    _id :ObjectId,
     name : {type :String , required: true},
     state : {type:String , required: true},
     description : String,

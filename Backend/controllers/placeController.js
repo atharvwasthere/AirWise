@@ -9,14 +9,14 @@
         */  
 
         const Place = require("../models/placeModel");
-        const { getStateFromCoordinates } = require("../utils/geocodeUtils");
+        const { getIndianLocationDetails  } = require("../services/geocodeService");
         const { fetchAQIData } = require("../services/aqiService");
         
         // Get hill stations in the user's state
         const getHillStationsByState = async (req, res) => {
           const { lat, lon } = req.query;
           try {
-            const state = await getStateFromCoordinates(lat, lon);
+            const state = await getIndianLocationDetails (lat, lon);
             const hillStations = await Place.find({ state });
             res.json(hillStations);
           } catch (error) {
@@ -33,3 +33,6 @@
             res.status(500).json({ message: error.message });
           }
         };
+
+module.exports = {getAQIHistory ,getHillStationsByState}
+

@@ -1,7 +1,7 @@
 import { Axios } from "axios";
 import {redisClient} from "../config/redis.js"
 
-const fetchAQIData = async (lat, lon) => {
+export const fetchAQIData = async (lat, lon) => {
   const cacheKey = `aqi:${lat},${lon}`;
   try {
     const cachedData = await redisClient.get(cacheKey);
@@ -26,4 +26,3 @@ const fetchAQIData = async (lat, lon) => {
   }
 };
 
-module.exports = fetchAQIData ;

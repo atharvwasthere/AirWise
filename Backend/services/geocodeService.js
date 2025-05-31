@@ -3,7 +3,7 @@ import {redisClient} from "../config/redis.js"
 
 // geting  States from user's current corrdinates
 
-const getIndianLocationDetails  = async (lat, lon) => {
+export const getIndianLocationDetails  = async (lat, lon) => {
     const cacheKey = `geocode: ${lat},${lon}`;
     try {
     const cachedState = await redisClient.get(cacheKey);
@@ -39,7 +39,6 @@ const normalizeStateName = (State) =>{
     return stateMapping(State) || State;
 }
 
-module.exports = getIndianLocationDetails ;
 
 //redis failure => console.error
 //nominatim failure => throw error

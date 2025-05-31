@@ -47,15 +47,17 @@ cd aqi-trip-planner
 
 
 Install dependencies:
+```
 cd backend &amp;&amp; npm install
 cd ../frontend &amp;&amp; npm install
+```
 
 
 
 Set up environment variables:
 Create a .env file in the backend folder:
-MONGO_URI=mongodb://localhost:27017/aqi-places
-WAQI_API_KEY=your_waqi_api_key
+MONGO_URI=```mongodb://localhost:27017/aqi-places```
+WAQI_API_KEY=```your_waqi_api_key```
 PORT=5000
 
 
@@ -66,7 +68,7 @@ cd backend &amp;&amp; npm start
 
 
 Start the frontend development server:
-cd frontend &amp;&amp; npm start
+```cd frontend &amp;&amp; npm start```
 
 
 

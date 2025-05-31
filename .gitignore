@@ -45,3 +45,20 @@ Backend/dist/
 *.njsproj
 *.sln
 *.sw?
+
+# Images in the parent directory
+1.jpeg
+2.jpeg
+3.jpeg
+4jpeg.jpeg
+delhi.jpeg
+
+# Routes files
+Backend/routes
+
+# Specific files
+seed.js
+../api.md
+
+# Directories
+Structure

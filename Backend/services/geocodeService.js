@@ -1,5 +1,5 @@
-import { axios } from "axios";
-import {redisClient} from "../config/redis.js"
+import  axios  from "axios";
+import redisClient from "../config/redis.js"
 
 // geting  States from user's current corrdinates
 

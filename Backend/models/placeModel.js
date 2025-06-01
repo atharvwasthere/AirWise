@@ -17,10 +17,6 @@ const placeSchema = new Schema ({
         {
             date : Date,
             aqi : Number,
-            pm25 : Number,
-            pm10 : Number,
-            o3 : Number,
-            no2 : Number,
         }
     ],
     weather_patterns: {
@@ -34,6 +30,7 @@ const placeSchema = new Schema ({
       },
     avgAqi : Number,
     tags : [String],
+    rank: Number,
     createdAt : {type : Date, default : Date.now},
     updatedAt : {type : Date, default : Date.now}
 })

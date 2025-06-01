@@ -1,5 +1,5 @@
-import { Axios } from "axios";
-import {redisClient} from "../config/redis.js"
+import  Axios  from "axios";
+import redisClient from "../config/redis.js"
 
 export const fetchAQIData = async (lat, lon) => {
   const cacheKey = `aqi:${lat},${lon}`;

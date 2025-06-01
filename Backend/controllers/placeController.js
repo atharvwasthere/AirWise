@@ -8,8 +8,8 @@ post location details
 
 */
 
-import Place from "../models/placeModel"
-import { fetchAQIData, getIndianLocationDetails } from "../services";
+import Place from "../models/placeModel.js"
+import { fetchAQIData, getIndianLocationDetails } from "../services/index.js";
 
 
 // Get hill stations in the user's state
@@ -17,7 +17,7 @@ const getHillStationsByState = async (req, res) => {
   const { lat, lon } = req.query;
   try {
     const state = await getIndianLocationDetails(lat, lon);
-    const hillStations = await Place.find({ state });
+    const hillStations = await Place.find({ state, description: { $regex : /hill station/i} }); // case insesnsitve search
     res.json(hillStations);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -34,5 +34,4 @@ const getAQIHistory = async (req, res) => {
   }
 };
 
-module.exports = { getAQIHistory, getHillStationsByState }
-
+export {getAQIHistory, getHillStationsByState};

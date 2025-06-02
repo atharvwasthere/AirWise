@@ -1,5 +1,9 @@
 Recently, the AQI levels in Delhi and its surrounding areas have been making headlines for all the wrong reasons.&nbsp;With air pollution worsening and people scrambling for data to understand their local air quality, I decided to build this fun little project&nbsp;
 # AirWise – Breathe Better, Travel Smarter. 
+
+
+<img src="./Airwise.png" alt="Airwise Logo" width="200" height="100">
+
 [](https://chatgpt.com/c/LICENSE)
 [](https://nodejs.org/)
 [](https://www.mongodb.com/)

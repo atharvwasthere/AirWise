@@ -2,7 +2,7 @@ Recently, the AQI levels in Delhi and its surrounding areas have been making hea
 # AirWise – Breathe Better, Travel Smarter. 
 
 
-<img src="./Images/AirWise.png" alt="Airwise Logo" width="200" height="100">
+<img src="./Images/AirWise.png" alt="Airwise Logo">
 
 [](https://chatgpt.com/c/LICENSE)
 [](https://nodejs.org/)

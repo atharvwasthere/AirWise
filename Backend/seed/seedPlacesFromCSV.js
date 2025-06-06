@@ -7,9 +7,9 @@ dotenv.config();
 
 async function seedPlaces() {
     try {
-        const uri = process.env.MONGODB_URI_WSL;
+        const uri = process.env.MONGODB_URI;
         console.log("Mongo URI:", uri);
-        if (!uri) throw new Error("MONGODB_URI_WSL is undefined");
+        if (!uri) throw new Error("MONGODB_URI is undefined");
 
         await mongoose.connect(uri, {
             maxPoolSize: 10,

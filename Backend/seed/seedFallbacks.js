@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import xlsx from 'xlsx';
-import  StateFallback from '../models/statefallbackModel.js'; 
+import StateFallback from '../models/stateFallbackModel.js';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -20,6 +20,7 @@ async function seedFallbacks() {
     });
 
     try {
+      // await newFallback.deleteMany(); 
       await newFallback.save();
       console.log(`Inserted: ${row.state}`);
     } catch (err) {

@@ -19,7 +19,7 @@ export const getIndianLocationDetails  = async (lat, lon) => {
             params: { lat, lon, format: "json" , addressdetails: 1, country: "India"},
         });
         const state = normalizeStateName(response.data.address.state);
-
+        console.log(state);
         // chached for 2 weeks
         await redisClient.set(cacheKey , state, { EX: 1209600 }); 
         return state;
@@ -30,14 +30,76 @@ export const getIndianLocationDetails  = async (lat, lon) => {
 };
 
 // not really req but will check later 
-const normalizeStateName = (State) =>{
-    const stateMapping = { 
-        'Delhi': 'National Capital Territory of Delhi',
-        'Bombay': 'Maharashtra',
-        // Add more mappings as needed
-    };
-    return stateMapping(State) || State;
-}
+const normalizeStateName = (state) => {
+  if (!state) return null;
+  const stateLower = state.toLowerCase();
+  const stateMapping = {
+    // States (28)
+    'andhra pradesh': 'Andhra Pradesh',
+    'ap': 'Andhra Pradesh',
+    'arunachal pradesh': 'Arunachal Pradesh',
+    'assam': 'Assam',
+    'bihar': 'Bihar',
+    'chhattisgarh': 'Chhattisgarh',
+    'cg': 'Chhattisgarh',
+    'goa': 'Goa',
+    'gujarat': 'Gujarat',
+    'haryana': 'Haryana',
+    'himachal pradesh': 'Himachal Pradesh',
+    'hp': 'Himachal Pradesh',
+    'jharkhand': 'Jharkhand',
+    'karnataka': 'Karnataka',
+    'ka': 'Karnataka',
+    'kerala': 'Kerala',
+    'kl': 'Kerala',
+    'madhya pradesh': 'Madhya Pradesh',
+    'mp': 'Madhya Pradesh',
+    'maharashtra': 'Maharashtra',
+    'bombay': 'Maharashtra',
+    'mh': 'Maharashtra',
+    'manipur': 'Manipur',
+    'meghalaya': 'Meghalaya',
+    'mizoram': 'Mizoram',
+    'nagaland': 'Nagaland',
+    'odisha': 'Odisha',
+    'orissa': 'Odisha',
+    'punjab': 'Punjab',
+    'pb': 'Punjab',
+    'rajasthan': 'Rajasthan',
+    'rj': 'Rajasthan',
+    'sikkim': 'Sikkim',
+    'tamil nadu': 'Tamil Nadu',
+    'tn': 'Tamil Nadu',
+    'telangana': 'Telangana',
+    'ts': 'Telangana',
+    'tripura': 'Tripura',
+    'uttar pradesh': 'Uttar Pradesh',
+    'up': 'Uttar Pradesh',
+    'uttarakhand': 'Uttarakhand',
+    'uk': 'Uttarakhand',
+    'west bengal': 'West Bengal',
+    'wb': 'West Bengal',
+    // Union Territories (8)
+    'andaman and nicobar islands': 'Andaman and Nicobar Islands',
+    'andaman & nicobar': 'Andaman and Nicobar Islands',
+    'chandigarh': 'Chandigarh',
+    'dadra and nagar haveli': 'Dadra and Nagar Haveli and Daman and Diu',
+    'dadra & nagar haveli': 'Dadra and Nagar Haveli and Daman and Diu',
+    'daman and diu': 'Dadra and Nagar Haveli and Daman and Diu',
+    'daman & diu': 'Dadra and Nagar Haveli and Damanual',
+    'delhi': 'Delhi',
+    'nct': 'Delhi',
+    'national capital territory': 'Delhi',
+    'jammu & kashmir': 'Jammu and Kashmir',
+    'jammu': 'Jammu and Kashmir',
+    'kashmir': 'Jammu and Kashmir',
+    'ladakh': 'Ladakh',
+    'lakshadweep': 'Lakshadweep',
+    'puducherry': 'Puducherry',
+    'pondicherry': 'Puducherry'
+  };
+  return stateMapping[stateLower] || state;
+};
 
 
 //redis failure => console.error
